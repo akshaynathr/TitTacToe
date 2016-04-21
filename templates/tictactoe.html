@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head> <title> Tictactoe </title> </head>
+
+<body>
+<script>
+	var canvas;
+	var context;
+	var square;
+	window.onload=function(){
+		canvas=document.getElementById("board");
+		context=canvas.getContext("2d");
+		size=canvas.offsetWidth;
+		square=Math.floor(size/3);
+		canvas.addEventListener('mouseup',function(event){
+			var mousepos=getMousePos(event);
+			//draw_circle(mousepos.x,mousepos.y);
+			drawX(mousepos.x,mousepos.y);
+				});
+		drawGrid();
+	};
+
+	function drawGrid()
+{
+	context.beginPath();
+	context.moveTo(square,0);
+	context.lineTo(square,3*square);
+	context.stroke();
+
+	context.moveTo(2*square,0);
+	context.lineTo(2*square,3*square);
+	context.stroke();
+
+	context.moveTo(0,square);
+	context.lineTo(3*square,square);
+	context.stroke();
+
+	context.moveTo(0,2*square);
+	context.lineTo(3*square,2*square);
+	context.closePath();
+	context.stroke();
+	
+	//draw_circle(square/2,square/2);
+	//drawX(square/4,square+square/4);	
+
+
+}
+
+function draw_circle(x,y)
+{	//quadrant 1	
+	if(x<square && y<square) { x=square/2; y=square/2;}
+	//quadrant 2	
+
+	if(x>square && x< 2*square && y<square) { x=square+square/2; y=square/2;}
+//quadrant 3	
+
+	if(x> 2*square && x< 3*square && y<square) { x=2*square+square/2; y=square/2;}
+//quadrant 4	
+
+	if(x<square && y>square && y<2*square ) { x=square/2; y=square+square/2;}
+
+	//quadrant 5	
+if(x>square && x< 2*square && y>square && y<2*square) { x=square+square/2; y=square+square/2;}
+
+	//quadrant 6	
+
+	if(x> 2*square && x< 3*square && y>square && y<2*square) { x=2*square+square/2; y=square+square/2;}
+//quadrant 7	
+
+	if(x<square && y>2*square) { x=square/2; y=2*square+square/2;}
+//quadrant 8	
+
+	if(x>square && x< 2*square && y>2*square) { x=square+square/2; y=2*square+square/2;}
+	//quadrant 9	
+
+	if(x> 2*square && x< 3*square && y>2*square) { x=2*square+square/2; y=2*square+square/2;}
+
+	context.beginPath();	
+	context.arc(x,y,square/4,0,2*Math.PI);
+	context.lineWidth=5;
+	context.strokeStyle="#FAA";
+	context.stroke();
+	context.closePath();
+}
+
+function drawX (x,y)
+{
+	//quadrant 1	
+	if(x<square && y<square) { x=square/4; y=square/4; alert(y);}
+	//quadrant 2	
+
+	if(x>square && x< 2*square && y<square) { x=square+square/4; y=square/4;}
+//quadrant 3	
+
+	if(x> 2*square && x< 3*square && y<square) { x=2*square+square/4; y=square/4;}
+//quadrant 4	
+
+	if(x<square && y>square && y<2*square ) { alert(x);x=square/4; y=square+square/4;}
+
+	//quadrant 5	
+if(x>square && x< 2*square && y>square && y<2*square) { x=square+square/4; y=square+square/4;}
+
+	//quadrant 6	
+
+	if(x> 2*square && x< 3*square && y>square && y<2*square) { x=2*square+square/4; y=square+square/4;}
+//quadrant 7	
+
+	if(x<square && y>2*square) { x=square/4; y=2*square+square/4;}
+//quadrant 8	
+
+	if(x>square && x< 2*square && y>2*square) { x=square+square/4; y=2*square+square/4;}
+	//quadrant 9	
+
+	if(x> 2*square && x< 3*square && y>2*square) { x=2*square+square/4; y=2*square+square/4;}
+
+
+	context.beginPath();
+	context.moveTo(x,y);
+	context.lineTo(x+(2*square/4),y+(2*square/4));
+	context.strokeStyle="#FAF";
+	context.lineWidth=5;
+	context.stroke();
+	context.beginPath();
+	context.moveTo(x+(2*square/4),y);
+	context.lineTo(x,(y+(2*square/4)));
+	context.lineWidth=5;
+	context.stroke();
+	context.closePath();
+}
+
+function getMousePos(evt)
+{
+	var rect=canvas.getBoundingClientRect();
+	return {
+			x:evt.clientX-rect.left,
+			y:evt.clientY-rect.top
+		};
+}
+</script>
+<div style="text-align:center;">
+<canvas  id="board" width="500" height="500"> </canvas>
+</div>
+</body>
+
+</html>
